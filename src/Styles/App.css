@@ -16,11 +16,16 @@ header {
   font-size: 50px;
   color: white;
   position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
 }
 
 main {
-  padding-top: 100px;
+  padding: 100px 50px 50px 50px;
   display:flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -30,7 +35,7 @@ footer {
   flex-direction:  row;
   align-items: flex-end;
   justify-content: space-between;
-  border-top: 1px solid rgb(231, 231, 231);
+  border-top: 1px solid #e7e7e7;
 }
 
 footer h1 {

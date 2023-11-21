@@ -1,0 +1,47 @@
+h4 {
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newsHeader {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.arrowBack {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.publicationInfo {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15;
+    color: gray;
+}
+
+.image {
+    margin:20px -50px;  
+    height: 500px;
+    object-fit: cover;
+    object-position: 50% 0;
+}
+
+.author {
+    color: gray;
+}

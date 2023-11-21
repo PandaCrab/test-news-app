@@ -1,0 +1,43 @@
+.titleLink {
+    color: black;
+    text-decoration: none;
+}
+
+.titleLink:hover {
+    text-decoration: underline;
+}
+
+.titleSearch {
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchFilterContainer {
+    display: flex;
+    align-items: center;
+}
+
+.searchBar {
+    margin-right: 10px;
+    padding: 2px 5px;
+    width: 250px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.searchInput {
+    margin-left: 1px;
+    width: 90%;
+    height: 80%;
+    border: none;
+}
+
+.searchInput:focus-visible {
+    outline: none;
+}

@@ -1,4 +1,6 @@
-import NewsTable from './NewsTable';
+import NewsContainer from './NewsContainer';
 import NewsPage from './NewsPage';
+import DropdownFilter from './DropdownFilter';
+import NewsTable from './NewsTable';
 
-export { NewsTable, NewsPage };
+export { NewsContainer, NewsPage, DropdownFilter, NewsTable };
