@@ -5,7 +5,14 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const DropdownFilter = ({ filter, setFilter }) => {
+import type { FilterTypes } from '../types';
+
+interface Props {
+    filter: FilterTypes;
+    setFilter: React.Dispatch<React.SetStateAction<FilterTypes>>;
+};
+
+const DropdownFilter: React.FC<Props> = ({ filter, setFilter }) => {
     return (
         <Stack direction="row" spacing={4} sx={{ marginBottom: 5 }}>
             <FormControl size="small" sx={{ width: 200 }}> 

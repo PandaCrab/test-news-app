@@ -11,17 +11,25 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import { LinkOutlined } from '@mui/icons-material';
-import noImage from '../no_image.jpg';
 
-const NewsTable = ({ news, filter }) => {
+import { FilterTypes, Articles } from '../types';
+
+import noImage from '../imgs/no_image.jpg';
+
+interface Props {
+    news: Articles[] | undefined;
+    filter: FilterTypes
+}
+
+const NewsTable: React.FC<Props> = ({ news, filter }) => {
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
         setPage(newPage);
     };
     
-    const handleChangeRowsPerPage = ({ target }) => {
+    const handleChangeRowsPerPage = ({ target }: {target: { value: string }}) => {
         setRowsPerPage(parseInt(target.value, 10));
         setPage(0);
     };
@@ -43,7 +51,7 @@ const NewsTable = ({ news, filter }) => {
                     {news && news.length ? (rowsPerPage > 0
                             ? news.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             : news
-                        ).map((item, index) =>
+                        ).map((item: Articles, index: number) =>
                             item.title !== '[Removed]' && (
                             <TableRow key={index}>
                                 <TableCell>{item.urlToImage ? (
@@ -57,12 +65,12 @@ const NewsTable = ({ news, filter }) => {
                                         state={({item, filter})}
                                         className="titleLink"
                                     >
-                                        {item.title.slice(0, 50) + '...' ?? 'Whithout title'}
+                                        {item?.title.slice(0, 50) + '...' ?? 'Whithout title'}
                                     </Link>
                                 </TableCell>
                                 <TableCell>{item.author ?? 'Without author'}</TableCell>
                                 <TableCell>{item.description ? (item.description.slice(0, 70) + '...') : 'No description'}</TableCell>
-                                <TableCell>{item.publishedAt.slice(0, 10) ?? 'Unknown date'}</TableCell>
+                                <TableCell>{item?.publishedAt.slice(0, 10) ?? 'Unknown date'}</TableCell>
                                 <TableCell align="center">
                                     <a href={item.url} rel="noreferrer" target="_blank" >
                                         <LinkOutlined sx={{ color: "gray" }} />

@@ -1,13 +1,13 @@
 import React from 'react';
 import { EmailOutlined } from '@mui/icons-material';
-
+import Container from '@mui/material/Container';
 import { Outlet } from 'react-router-dom';
 
-import './Styles/App.css';
+import './Styles/App.module.css';
 
 function App() {
   return (
-    <div className="siteLayout">
+    <Container maxWidth='lg'>
       <header>Formula</header>
       <main>
         <Outlet />
@@ -22,7 +22,7 @@ function App() {
           <p>info@formula.com</p>
         </div>
       </footer>
-    </div>
+    </Container>
   );
 }
 

@@ -4,17 +4,18 @@ import { Search, FilterAltOutlined } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 
 import { DropdownFilter, NewsTable } from './index';
+import { Articles, FilterTypes } from '../types';
 
 import '../Styles/NewsContainerStyles.css';
 
-const baseUrl = 'https://newsapi.org/v2/top-headlines?';
-const apiKey = process.env.REACT_APP_API_KEY;
+const baseUrl = new URL('https://newsapi.org/v2/top-headlines?');
+const apiKey: string = process.env.REACT_APP_API_KEY ?? '';
 
 const NewsContainer = () => {
-    const [news, setNews] = useState();
-    const [search, setSearch] = useState('');
-    const {state} = useLocation();
-    const [filter, setFilter] = useState(state ?? {
+    const [news, setNews] = useState<Articles[] | undefined>();
+    const [search, setSearch] = useState<string>('');
+    const { state } = useLocation();
+    const [filter, setFilter] = useState<FilterTypes>(state ?? {
         category: '',
         country: 'us'
     });
@@ -23,7 +24,10 @@ const NewsContainer = () => {
 
     useEffect(() => {
         const getNews = async() => {
-            const response = await fetch(`${baseUrl}category=${filter.category ?? ''}&country=${filter.country ?? ''}&apiKey=${apiKey}`);
+            baseUrl.searchParams.append('category', (filter.category ?? ''));
+            baseUrl.searchParams.append('country', (filter.country ?? ''));
+            baseUrl.searchParams.append('apiKey', apiKey);
+            const response = await fetch(baseUrl.toString());
             const data = await response.json();
             setNews(data.articles);
         };
@@ -31,19 +35,19 @@ const NewsContainer = () => {
         getNews();
     }, []);
 
-    useEffect(() => {
-        const getNews = async() => {
-            const response = 
-                    await fetch(
-                        `${baseUrl}q=${search.length > 3 ? search : ''}&category=${filter.category}&country=${filter.country}&apiKey=${apiKey}`
-                    );
-            const data = await response.json();
+    // useEffect(() => {
+    //     const getNews = async() => {
+    //         const response = 
+    //                 await fetch(
+    //                     `${baseUrl}q=${search.length > 3 ? search : ''}&category=${filter.category}&country=${filter.country}&apiKey=${apiKey}`
+    //                 );
+    //         const data = await response.json();
 
-            setNews(data.articles);
-        };
+    //         setNews(data.articles);
+    //     };
 
-        getNews();
-    }, [search, filter]);
+    //     getNews();
+    // }, [search, filter]);
 
     return (    
         <>
@@ -51,7 +55,7 @@ const NewsContainer = () => {
                 <h2>Formula Top Headlines</h2>
                 <div className="searchFilterContainer">
                     <div className='searchBar'>
-                        <Search color="gray" sx={{ fontSize: 20 }} />
+                        <Search sx={{ fontSize: 20 }} />
                         <input 
                             type="text"
                             name="searchInput"
